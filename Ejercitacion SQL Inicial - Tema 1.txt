@@ -1,0 +1,36 @@
+1.
+
+CREATE TABLE CURSO (
+  codigo int NOT NULL,
+  nombre varchar(50) NOT NULL,
+  descripcion Varchar(100),
+  turno Varchar(25) NOT NULL, 
+  PRIMARY KEY (codigo)
+)
+
+2.
+
+Alter Table CURSO add cupo int;
+
+3.
+
+INSERT INTO CURSO values (101, "Algoritmos", "Algoritmos y Estructuras de Datos","Mañana",35);
+
+
+INSERT INTO CURSO values (102, "Matematica Discreta","","Tarde",30);
+
+4.
+
+INSERT INTO CURSO values (102, "", "Matematica Discreta","Tarde",30);
+
+5.
+
+INSERT INTO CURSO values (101, "Arquitectura de las Computadoras","","Tarde",30);
+
+6. 
+
+UPDATE CURSO SET cupo = 25;
+
+7.
+
+DELETE from CURSO WHERE codigo = 101;
