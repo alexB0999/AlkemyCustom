@@ -43,11 +43,11 @@ INSERT INTO PROFESOR values (4, "Lucía", "Díaz","1991-02-24",45000);
 INSERT INTO PROFESOR values (5, "Raúl", "Martínez","1980-10-15",85000);
 INSERT INTO PROFESOR values (6, "Mabel", "Ríos","1982-06-12",83000);
 
-INSERT INTO CURSO values (101, "Algoritmos", "Algoritmos y Estructuras de Datos","Mañana",20,1);
-INSERT INTO CURSO values (102, "Matemática Discreta", "","Tarde",20,2);
-INSERT INTO CURSO values (103, "Programación Java", "POO en Java","Noche",35,4);
-INSERT INTO CURSO values (104, "Programación Web", "","Noche",35,5);
-INSERT INTO CURSO values (105, "Programación C#", ".NET, Visual Studio 2019","Noche",30,6);
+INSERT INTO CURSO values (101, "Algoritmos", "Algoritmos y Estructuras de Datos",20,"Mañana",1);
+INSERT INTO CURSO values (102, "Matemática Discreta", "",20,"Tarde",2);
+INSERT INTO CURSO values (103, "Programación Java", "POO en Java",35,"Noche",4);
+INSERT INTO CURSO values (104, "Programación Web", "",35,"Noche",5);
+INSERT INTO CURSO values (105, "Programación C#", ".NET, Visual Studio 2019",30,"Noche",6);
 
 INSERT INTO ESTUDIANTE VALUES (36485,"Romina","Nieva","1999-11-26","Mecánica");
 INSERT INTO ESTUDIANTE VALUES (39685,"Brenda","Medrano","2000-09-25","Sistemas");
