@@ -1,0 +1,42 @@
+Con este caso podemos hacer lo siguiente:
+Consultar todas las columnas de la tabla PROFESOR ejecutando
+SELECT * FROM PROFESOR;
+
+Consultar solamente los nombres de los profesores ejecutando
+SELECT nombre FROM PROFESOR;
+
+Consultar nombre, apellido y cursos que dicta cada profesor ejecutando
+SELECT p.nombre, p.apellido, c.nombre FROM PROFESOR p INNER JOIN CURSO c ON p.id = c.PROFESOR_id;
+
+Consultar todas las columnas resultantes del JOIN entre PROFESOR y CURSO
+SELECT * FROM PROFESOR p INNER JOIN CURSO c ON p.id = c.PROFESOR_id;
+
+Ejercicios
+
+1. Nombre, apellido y cursos que realiza cada estudiante
+SELECT e.nombre AS Nombre, e.apellido as Apellido, c.nombre AS Curso from INSCRIPCION i 
+JOIN ESTUDIANTE e on i.ESTUDIANTE_legajo = e.legajo
+JOIN CURSO c on i.CURSO_codigo = c.codigo;
+
+2. Nombre, apellido y cursos que realiza cada estudiante, ordenados por el nombre del curso
+SELECT e.nombre AS Nombre, e.apellido as Apellido, c.nombre AS Curso from INSCRIPCION i 
+JOIN ESTUDIANTE e on i.ESTUDIANTE_legajo = e.legajo
+JOIN CURSO c on i.CURSO_codigo = c.codigo
+ORDER By c.nombre
+
+3. Nombre, apellido y cursos que dicta cada profesor
+SELECT p.nombre AS Nombre, p.apellido as Apellido, c.nombre AS Curso from PROFESOR p
+LEFT JOIN CURSO c  on c.profesor_id = p.id;
+
+4. Nombre, apellido y cursos que dicta cada profesor, ordenados por el nombre del curso
+SELECT p.nombre AS Nombre, p.apellido as Apellido, c.nombre AS Curso from PROFESOR p
+LEFT JOIN CURSO c  on c.profesor_id = p.id
+ORDER By c.nombre;
+
+5. Cupo disponible para cada curso (Si el cupo es de 35 estudiantes y hay 5 inscriptos, el cupo disponible será 30)
+select c.codigo, c.nombre, c.cupo - count(i.estudiante_legajo) as cupos_disponibles 
+from curso c left join inscripcion i on c.codigo = i.curso_codigo group by c.nombre;
+
+6. Cursos cuyo cupo disponible sea menor a 10
+select c.codigo, c.nombre, c.cupo - count(i.estudiante_legajo) as cupos_disponibles 
+from curso c left join inscripcion i on c.codigo = i.curso_codigo group by c.nombre HAVING cupos_disponibles < 17;
