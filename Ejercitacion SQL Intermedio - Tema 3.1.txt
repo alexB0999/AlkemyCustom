@@ -1,0 +1,13 @@
+CREATE TABLE PERSONA(
+  id int,
+  nombre VARCHAR(45)
+);
+
+INSERT INTO PERSONA VALUES (2, "Pepito");
+INSERT Into PERSONA VALUES (1, "Juacito");
+
+SELECT * from PERSONA;
+
+ALTER TABLE PERSONA Add PRIMARY Key (id);
+
+SELECT * from PERSONA;
