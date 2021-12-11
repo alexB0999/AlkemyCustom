@@ -1,0 +1,83 @@
+Create TABLE ESTUDIANTE (
+  legajo INT NOT NULL,
+  nombre varchar(45), 
+  apellido Varchar(45),
+  fecha_nacimiento DATE, 
+  carrera Varchar(45),
+  PRIMARY KEY (legajo)
+);
+
+CREATE TABLE PROFESOR (
+  id INT NOT NULL,
+  nombre varchar(50), 
+  apellido Varchar(50),
+  fecha_nacimiento DATE, 
+  salario FLOAT,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE CURSO (
+  codigo int NOT NULL,
+  nombre varchar(45) NOT NULL,
+  descripcion Varchar(45),
+  cupo int,
+  turno Varchar(45) NOT NULL,
+  PROFESOR_id int,
+  PRIMARY KEY (codigo),
+  FOREIGN KEY(PROFESOR_id) REFERENCES PROFESOR(id)
+);
+
+Create TABLE INSCRIPCION(
+  numero INT NOT NULL,
+  CURSO_codigo INT,
+  ESTUDIANTE_legajo int,
+  fecha_hora TIMESTAMP,
+  FOREIGN KEY(CURSO_codigo) REFERENCES CURSO(codigo),
+  FOREIGN KEY(ESTUDIANTE_legajo) REFERENCES ESTUDIANTE(legajo)
+);
+
+INSERT INTO PROFESOR values (1, "Juan", "Pérez","1990-06-06",55000);
+INSERT INTO PROFESOR values (2, "María Emilia", "Paz","1984-07-15",72000);
+INSERT INTO PROFESOR values (3, "Martín", "Correa","1987-12-07",63000);
+INSERT INTO PROFESOR values (4, "Lucía", "Díaz","1991-02-24",45000);
+INSERT INTO PROFESOR values (5, "Raúl", "Martínez","1980-10-15",85000);
+INSERT INTO PROFESOR values (6, "Mabel", "Ríos","1982-06-12",83000);
+
+INSERT INTO CURSO values (101, "Algoritmos", "Algoritmos y Estructuras de Datos",20,"Mañana",1);
+INSERT INTO CURSO values (102, "Matemática Discreta", "",20,"Tarde",2);
+INSERT INTO CURSO values (103, "Programación Java", "POO en Java",35,"Noche",4);
+INSERT INTO CURSO values (104, "Programación Web", "",35,"Noche",5);
+INSERT INTO CURSO values (105, "Programación C#", ".NET, Visual Studio 2019",30,"Noche",6);
+
+INSERT INTO ESTUDIANTE VALUES (36485,"Romina","Nieva","1999-11-26","Mecánica");
+INSERT INTO ESTUDIANTE VALUES (39685,"Brenda","Medrano","2000-09-25","Sistemas");
+INSERT INTO ESTUDIANTE VALUES (41258,"Ramiro","Ríos","1994-12-16","Sistemas");
+INSERT INTO ESTUDIANTE VALUES (43651,"Cristian","Gómez","1995-03-19","Mecánica");
+INSERT INTO ESTUDIANTE VALUES (47521,"María","Velazquez","1998-01-02","Sistemas");
+INSERT INTO ESTUDIANTE VALUES (47961,"Alexis","Reinoso","1994-12-17","Sistemas");
+INSERT INTO ESTUDIANTE VALUES (48952,"Gabriel","Morales","1996-10-03","Sistemas");
+INSERT INTO ESTUDIANTE VALUES (51200,"Lourdes","Martinez","2001-12-13","Sistemas");
+
+INSERT INTO INSCRIPCION VALUES (1,101,41258,"2012-05-02 18:45:00");
+INSERT INTO INSCRIPCION VALUES (2,102,41258,"2012-04-02 18:45:00");
+INSERT INTO INSCRIPCION VALUES (3,102,47961,"2012-01-02 20:01:00");
+INSERT INTO INSCRIPCION VALUES (4,103,47961,"2012-04-28 18:45:00");
+INSERT INTO INSCRIPCION VALUES (5,101,39685,"2012-04-12 18:45:00");
+INSERT INTO INSCRIPCION VALUES (6,103,39685,"2012-04-28 18:45:00");
+INSERT INTO INSCRIPCION VALUES (7,103,43651,"2012-04-28 18:45:00");
+INSERT INTO INSCRIPCION VALUES (8,101,47961,"2012-04-28 18:45:00");
+INSERT INTO INSCRIPCION VALUES (11,101,43651,"2012-04-21 18:45:00");
+INSERT INTO INSCRIPCION VALUES (13,102,47521,"2012-04-03 18:45:00");
+INSERT INTO INSCRIPCION VALUES (14,102,51200,"2012-05-02 18:45:00");
+
+1. 
+
+SELECT count(*) AS Cantidad_Cursos from (
+SELECT p.id, count(*) from Curso c join profesor p on c.profesor_id = p.id 
+where turno like "Noche" GROUP by p.id having Count(*) > 1)
+
+2. 
+
+SELECT * FROM ESTUDIANTE e where e.legajo NOT IN (
+SELECT e.legajo from ESTUDIANTE e JOIN INSCRIPCION i on i.ESTUDIANTE_legajo = e.legajo 
+JOIN CURSO c On i.CURSO_codigo = c.codigo where c.codigo = 105)
